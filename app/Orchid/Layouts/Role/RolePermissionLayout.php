@@ -36,7 +36,7 @@ class RolePermissionLayout extends Rows
     private function generatedPermissionFields(Collection $permissionsRaw): array
     {
         return $permissionsRaw
-            ->map(fn(Collection $permissions, $title) => $this->makeCheckBoxGroup($permissions, $title))
+            ->map(fn (Collection $permissions, $title) => $this->makeCheckBoxGroup($permissions, $title))
             ->flatten()
             ->toArray();
     }
@@ -52,13 +52,13 @@ class RolePermissionLayout extends Rows
     private function makeCheckBoxGroup(Collection $permissions, string $title): Collection
     {
         return $permissions
-            ->map(fn(array $chunks) => $this->makeCheckBox(collect($chunks)))
+            ->map(fn (array $chunks) => $this->makeCheckBox(collect($chunks)))
             ->flatten()
-            ->map(fn(CheckBox $checkbox, $key) => $key === 0
+            ->map(fn (CheckBox $checkbox, $key) => $key === 0
                 ? $checkbox->title($title)
                 : $checkbox)
             ->chunk(4)
-            ->map(fn(Collection $checkboxes) => Group::make($checkboxes->toArray())
+            ->map(fn (Collection $checkboxes) => Group::make($checkboxes->toArray())
                 ->alignEnd()
                 ->autoWidth());
     }
@@ -70,12 +70,12 @@ class RolePermissionLayout extends Rows
     {
         /** @var string $slug */
         $slug = $chunks->get('slug');
-        /** @var string $active */
+        /** @var bool $active */
         $active = $chunks->get('active');
         /** @var ?string $description */
         $description = $chunks->get('description');
 
-        return CheckBox::make('permissions.' . base64_encode($slug))
+        return CheckBox::make('permissions.'.base64_encode($slug))
             ->placeholder($description)
             ->value($active)
             ->sendTrueOrFalse()
@@ -85,12 +85,12 @@ class RolePermissionLayout extends Rows
             ));
     }
 
-    private function getIndeterminateStatus(string $slug, string $value): bool
+    private function getIndeterminateStatus(string $slug, bool $value): bool
     {
         if ($this->user === null) {
             return false;
         }
 
-        return $this->user->hasAccess($slug) && $value === '0';
+        return $this->user->hasAccess($slug) && $value === false;
     }
 }

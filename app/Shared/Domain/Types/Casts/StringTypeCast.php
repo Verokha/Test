@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Types\Casts;
+namespace App\Shared\Domain\Types\Casts;
 
-use App\Types\String\AbstractStringType;
+use App\Shared\Domain\Types\String\AbstractStringType;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 /**

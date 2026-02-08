@@ -2,9 +2,10 @@
 
 namespace App\User\Domain\Models;
 
+use App\Shared\Domain\Types\Casts\StringTypeCast;
+use App\Shared\Domain\Types\Enum\Role;
+use App\Shared\Domain\Types\String\Email;
 use App\Site\Domain\Models\Site;
-use App\Types\Casts\StringTypeCast;
-use App\Types\String\Email;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
@@ -46,7 +47,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $casts = [
-        'domain' => StringTypeCast::class . ':' . Email::class,
+        'domain' => StringTypeCast::class.':'.Email::class,
         'permissions' => 'array',
         'email_verified_at' => 'datetime',
     ];
@@ -79,5 +80,10 @@ class User extends Authenticatable
     public function sites(): HasMany
     {
         return $this->hasMany(Site::class);
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->inRole(Role::SaAdmin->value);
     }
 }

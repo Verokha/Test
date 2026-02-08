@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
-use App\User\Domain\Models\User;
 use App\Orchid\Layouts\Role\RolePermissionLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserPasswordLayout;
 use App\Orchid\Layouts\User\UserRoleLayout;
+use App\User\Domain\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -160,7 +160,7 @@ class UserEditScreen extends Screen
         /** @var string[] $newPerms */
         $newPerms = $request->get('permissions');
         $permissions = collect($newPerms)
-            ->map(fn($value, $key) => [base64_decode((string) $key) => $value])
+            ->map(fn ($value, $key) => [base64_decode((string) $key) => $value])
             ->collapse()
             ->toArray();
 

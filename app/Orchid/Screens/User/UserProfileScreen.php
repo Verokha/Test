@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
-use App\User\Domain\Models\User;
 use App\Orchid\Layouts\User\ProfilePasswordLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
+use App\User\Domain\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -122,7 +122,7 @@ class UserProfileScreen extends Screen
         /** @var string $guard */
         $guard = config('platform.guard', 'web');
         $request->validate([
-            'old_password' => 'required|current_password:' . $guard,
+            'old_password' => 'required|current_password:'.$guard,
             'password' => 'required|confirmed|different:old_password',
         ]);
         /** @var User $user */

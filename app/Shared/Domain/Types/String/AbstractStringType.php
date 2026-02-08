@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Types\String;
+namespace App\Shared\Domain\Types\String;
 
 /**
  * @property-read string $value

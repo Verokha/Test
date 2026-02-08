@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
-use App\User\Domain\Models\User;
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserFiltersLayout;
 use App\Orchid\Layouts\User\UserListLayout;
+use App\User\Domain\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Orchid\Screen\Actions\Link;

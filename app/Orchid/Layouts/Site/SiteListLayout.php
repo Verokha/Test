@@ -28,7 +28,7 @@ class SiteListLayout extends Table
     {
         return [
             TD::make('title', 'Title')
-                ->render(fn(Site $site) => Link::make($site->domain)
+                ->render(fn (Site $site) => Link::make($site->domain)
                     ->route('platform.site.edit', [$site->id])),
 
             TD::make('created_at', 'Created'),

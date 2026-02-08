@@ -3,7 +3,9 @@
 namespace App\Orchid\Screens\Site;
 
 use App\Orchid\Layouts\Site\SiteListLayout;
-use App\Site\Domain\Models\Site;
+use App\Site\Domain\Repositories\SiteRepositoryInterface;
+use App\User\Domain\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
@@ -14,8 +16,12 @@ class SiteListScreen extends Screen
      */
     public function query(): iterable
     {
+        /** @var User $curretUser */
+        $curretUser = Auth::user();
+
         return [
-            'sites' => Site::paginate(),
+            'sites' => app(SiteRepositoryInterface::class)
+                ->orchidListForUser($curretUser),
         ];
     }
 
